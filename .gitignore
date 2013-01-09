@@ -1,3 +1,5 @@
 *.form
 *.swp
 *.bak
+.DS_Store
+
