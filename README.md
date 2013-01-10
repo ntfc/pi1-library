@@ -1,6 +1,4 @@
-############################################################################
-PROVIDER NOTES
-############################################################################
+# NOTES
  - The implementation classes (ie. org.cssi.paillier.PaillierPrivateKeyImpl) must
 be 'final class ClassNameImpl' so that they are only visible for the classes in
 the same package (ie. in org.cssi.paillier)
@@ -10,9 +8,8 @@ variables can be obtained with getG(), getN(), etc
  - The interfaces in org.cssi.paillier.interfaces only have the methods (besides
 the ones inherited from PublicKey or PaillierKey) specific from that class
    - org.cssi.paillier.interfaces.PaillierPublicKey only has the getG() method
-############################################################################
-HOW TO USE THIS PROVIDER
-############################################################################
+
+# USAGE
 - to add the provider do: Security.addProvider(new CssiProvider());
 - KeyPairGenerator for Paillier
   - Usage: KeyPairGenerator.getInstance("Paillier", "CSSI");
@@ -29,9 +26,8 @@ HOW TO USE THIS PROVIDER
     PublicKey p = keyFactory.generatePublic(spec);
 - org.cssi.numbers.CryptoNumbers contain the methods that generate random 
 numbers and operate on (crypto) numbers
-#####
-TODO:
-#####
+
+# TODO:
 - see http://javasourcecode.org/html/open-source/jdk/jdk-6u23/sun/security/rsa/RSAKeyFactory.java.html
 - DOUBT: move org.utils to CSSIVoting?? 
 - improve the KeyImpl:
