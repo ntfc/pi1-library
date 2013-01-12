@@ -32,7 +32,7 @@ public class DataStreamUtils {
    * Write the array <code>data</code> to a DataOutputStream
    * @param data
    */
-  public void wryteBytes(byte[] data) throws IOException {
+  public void writeBytes(byte[] data) throws IOException {
     int len = data.length;
     dos.writeInt(len);
     dos.flush();
@@ -66,7 +66,7 @@ public class DataStreamUtils {
    * @param n
    */
   public void writeBigInteger(BigInteger n) throws IOException {
-    wryteBytes(n.toByteArray());
+    writeBytes(n.toByteArray());
   }
 
   public BigInteger readBigInteger() throws IOException {
