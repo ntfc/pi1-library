@@ -46,7 +46,7 @@ public class PaillierKeyFactory extends KeyFactorySpi {
   protected PrivateKey engineGeneratePrivate(KeySpec keySpec) throws InvalidKeySpecException {
     if(keySpec instanceof PaillierPrivateKeySpec) {
       PaillierPrivateKeySpec s = (PaillierPrivateKeySpec) keySpec;
-      return new PaillierPrivateKeyImpl(s.getN(), s.getMu(), s.getLambda());
+      return new PaillierPrivateKeyImpl(s.getP(), s.getQ(), s.getN(), s.getMu(), s.getLambda());
     }
     else {
       throw new InvalidKeySpecException("KeySpec " + keySpec.getClass() + " not supported.");

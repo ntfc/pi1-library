@@ -13,12 +13,22 @@ import org.cssi.paillier.interfaces.PaillierPrivateKey;
  * @author nc
  */
 /*public */final class PaillierPrivateKeyImpl implements PaillierPrivateKey {
-  private final BigInteger n, mu, lambda;
+  private final BigInteger n, mu, lambda, p, q;
 
-  public PaillierPrivateKeyImpl(BigInteger n, BigInteger mu, BigInteger lambda) {
+  public PaillierPrivateKeyImpl(BigInteger p, BigInteger q, BigInteger n, BigInteger mu, BigInteger lambda) {
     this.n = n;
     this.mu = mu;
     this.lambda = lambda;
+    this.p = p;
+    this.q = q;
+  }
+
+  public PaillierPrivateKeyImpl(BigInteger p, BigInteger q, BigInteger mu, BigInteger lambda) {
+    this.n = p.multiply(q);
+    this.mu = mu;
+    this.lambda = lambda;
+    this.p = p;
+    this.q = q;
   }
 
   @Override
@@ -48,6 +58,16 @@ import org.cssi.paillier.interfaces.PaillierPrivateKey;
 
   @Override
   public byte[] getEncoded() {
+    throw new UnsupportedOperationException("Not supported yet.");
+  }
+
+  @Override
+  public BigInteger getP() {
+    return BigInteger.ONE;
+  }
+
+  @Override
+  public BigInteger getQ() {
     throw new UnsupportedOperationException("Not supported yet.");
   }
 

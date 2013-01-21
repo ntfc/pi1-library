@@ -29,5 +29,4 @@ public final class PaillierPublicKeySpec implements KeySpec {
     return g;
   }
 
-
 }

@@ -22,4 +22,16 @@ public interface PaillierPrivateKey extends PaillierKey, PrivateKey {
    * @return
    */
   BigInteger getLambda();
+
+  /**
+   * Returns the p used to create this key
+   * @return
+   */
+  BigInteger getP();
+
+  /**
+   * Returns the q used to create this key
+   * @return
+   */
+  BigInteger getQ();
 }
