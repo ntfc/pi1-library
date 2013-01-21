@@ -63,12 +63,12 @@ import org.cssi.paillier.interfaces.PaillierPrivateKey;
 
   @Override
   public BigInteger getP() {
-    return BigInteger.ONE;
+    return this.p;
   }
 
   @Override
   public BigInteger getQ() {
-    throw new UnsupportedOperationException("Not supported yet.");
+    return this.q;
   }
 
 }
