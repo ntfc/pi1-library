@@ -32,6 +32,7 @@ import org.cssi.paillier.interfaces.PaillierPublicKey;
     System.arraycopy(data, 8 + nLen, pubG, 0, gLen);
     this.n = new BigInteger(pubN);
     this.g = new BigInteger(pubG);
+    this.nSquare = n.pow(2);
   }
 
   @Override
