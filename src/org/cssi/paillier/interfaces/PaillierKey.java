@@ -17,4 +17,10 @@ public interface PaillierKey {
    * @return
    */
   BigInteger getN();
+
+  /**
+   * Returns the public modulus n^2
+   * @return
+   */
+  BigInteger getNSquare();
 }

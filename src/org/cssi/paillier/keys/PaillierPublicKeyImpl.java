@@ -13,11 +13,12 @@ import org.cssi.paillier.interfaces.PaillierPublicKey;
  * @author nc
  */
 /*public*/ final class PaillierPublicKeyImpl implements PaillierPublicKey {
-  private final BigInteger n, g;
+  private final BigInteger n, g, nSquare;
 
   public PaillierPublicKeyImpl(BigInteger n, BigInteger g) {
     this.n = n;
     this.g = g;
+    this.nSquare = n.pow(2);
   }
   public PaillierPublicKeyImpl(byte[] data) {
     byte[] len = new byte[4]; // length of n and g
@@ -36,6 +37,11 @@ import org.cssi.paillier.interfaces.PaillierPublicKey;
   @Override
   public BigInteger getN() {
     return this.n;
+  }
+
+  @Override
+  public BigInteger getNSquare() {
+    return nSquare;
   }
 
   @Override

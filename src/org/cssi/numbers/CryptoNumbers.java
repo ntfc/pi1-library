@@ -5,7 +5,7 @@
 package org.cssi.numbers;
 
 import java.math.BigInteger;
-import java.security.SecureRandom;
+import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -28,7 +28,7 @@ public class CryptoNumbers {
    * @return the new random prime
    */
   public static BigInteger generateRandomPrime(int bitLength,
-                                               SecureRandom random) {
+                                               Random random) {
     return BigInteger.probablePrime(bitLength, random);
   }
 
@@ -39,7 +39,7 @@ public class CryptoNumbers {
    * @param random
    * @return
    */
-  public static BigInteger genRandomZN(BigInteger n, SecureRandom random) {
+  public static BigInteger genRandomZN(BigInteger n, Random random) {
     BigInteger g;
     int modLength = n.bitCount();
     do {
@@ -57,7 +57,7 @@ public class CryptoNumbers {
    * @param random
    * @return
    */
-  public static BigInteger genRandomZStarN(BigInteger n, SecureRandom random) {
+  public static BigInteger genRandomZStarN(BigInteger n, Random random) {
     BigInteger g;
     int modLength = n.bitLength();
     do {
@@ -75,7 +75,7 @@ public class CryptoNumbers {
    * @param random
    * @return
    */
-  public static BigInteger genRandomZStarNSquare(BigInteger nSquare, SecureRandom random) {
+  public static BigInteger genRandomZStarNSquare(BigInteger nSquare, Random random) {
     BigInteger g;
     int modLength = nSquare.bitLength();
     do {
@@ -126,5 +126,21 @@ public class CryptoNumbers {
     pMinusOne = p.subtract(BigInteger.ONE);
     qMinusOne = q.subtract(BigInteger.ONE);
     return pMinusOne.multiply(qMinusOne).divide(pMinusOne.gcd(qMinusOne));
+  }
+
+  /**
+   * Generates a random number, ranging from 1 to (2^nBits)-1
+   * 
+   * @param nBits
+   * @return
+   */
+  public static BigInteger genRandomNumber(int nBits, Random rand) {
+    BigInteger n;
+    do {
+      n = new BigInteger(nBits, rand);
+    }
+    while(n.compareTo(BigInteger.ZERO) == 0 || n.bitLength() != nBits);
+    return n;
+
   }
 }
