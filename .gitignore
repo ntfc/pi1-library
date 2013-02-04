@@ -12,5 +12,5 @@
 ########
 build.xml
 manifest.mf
-build/
+/build/
 nbproject/
