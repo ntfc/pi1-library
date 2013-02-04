@@ -6,3 +6,11 @@
 ._*
 .Spotlight-V100
 .Trashes
+
+########
+# NetBeans
+########
+build.xml
+manifest.mf
+build/
+nbproject/

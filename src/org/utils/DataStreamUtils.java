@@ -43,6 +43,9 @@ public class DataStreamUtils {
 
   /**
    * Read an array of byte from the DataInputStream
+   * <p>
+   * First, it reads an int with the number of bytes to be transfered, and then,
+   * it reads the byte array with the data
    * @return
    * @throws IOException
    */
