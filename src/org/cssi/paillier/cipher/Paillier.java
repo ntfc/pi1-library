@@ -9,6 +9,7 @@ import java.security.InvalidKeyException;
 import java.security.PrivateKey;
 import java.security.PublicKey;
 import java.security.SecureRandom;
+import java.util.Set;
 
 /**
  * Abstract class that define the basic methods of a Paillier cryptosystem
@@ -63,5 +64,16 @@ public abstract class Paillier {
    * @throws PaillierException if <code>c</code> is bigger than modulus n^2
    */
   public abstract BigInteger dec(PrivateKey key, BigInteger c) throws
+          PaillierException, InvalidKeyException;
+
+  /**
+   * Applies the homomorphic property of Paillier to a List of ciphertexts
+   * @param key
+   * @param l
+   * @return
+   * @throws PaillierException
+   * @throws InvalidKeyException
+   */
+  public abstract BigInteger mult(PrivateKey key, Set<BigInteger> l) throws
           PaillierException, InvalidKeyException;
 }

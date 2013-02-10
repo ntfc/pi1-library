@@ -8,6 +8,7 @@ import java.security.InvalidKeyException;
 import java.security.PrivateKey;
 import java.security.PublicKey;
 import java.security.SecureRandom;
+import java.util.Set;
 import org.cssi.numbers.CryptoNumbers;
 import org.cssi.paillier.interfaces.PaillierPrivateKey;
 import org.cssi.paillier.interfaces.PaillierPublicKey;
@@ -95,5 +96,19 @@ public final class PaillierSimple extends Paillier {
     //m = (L(c^lambda mod n^2) * mu) mod n
     BigInteger l = CryptoNumbers.L(c.modPow(lambda, nSquare).multiply(mu), n);
     return l.mod(n);
+  }
+
+  @Override
+  public BigInteger mult(PrivateKey key,
+                         Set<BigInteger> l) throws PaillierException,
+    InvalidKeyException {
+    if(l.isEmpty())
+      return null;
+    BigInteger h = BigInteger.ONE;
+    for(BigInteger b : l) {
+      h = h.multiply(b);
+    }
+    System.err.println("h = " + h);
+    return h.mod(((PaillierPrivateKey)key).getNSquare());
   }
 }

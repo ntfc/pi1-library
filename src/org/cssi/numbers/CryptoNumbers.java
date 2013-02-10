@@ -143,4 +143,25 @@ public class CryptoNumbers {
     return n;
 
   }
+
+  /**
+   * Calcute a product of <code>a</code> BigInteger's, modulo <code>mod</code>.
+   * <p>
+   *
+   * @param mod
+   * @param a
+   * @return
+   */
+  @Deprecated
+  public static BigInteger productMod(BigInteger mod, BigInteger ... a) {
+    // Use ZKP.productModNSquare
+    if(a.length < 1)
+      return BigInteger.ZERO;
+
+    BigInteger ret = BigInteger.ONE;
+    for(BigInteger n : a) {
+      ret = ret.multiply(n).mod(mod);
+    }
+    return ret.mod(mod);
+  }
 }
