@@ -19,12 +19,17 @@ import org.cssi.paillier.interfaces.PaillierPublicKey;
  * @author nc
  */
 public final class PaillierSimple extends Paillier {
-
+  public static final int CODE = 0x01;
   /**
    * Implementation of a simple Paillier cryptosystem
    */
   public PaillierSimple() {
     super();
+  }
+
+  @Override
+  public int getCODE() {
+    return CODE;
   }
 
   @Override
@@ -108,7 +113,6 @@ public final class PaillierSimple extends Paillier {
     for(BigInteger b : l) {
       h = h.multiply(b);
     }
-    System.err.println("h = " + h);
     return h.mod(((PaillierPrivateKey)key).getNSquare());
   }
 }

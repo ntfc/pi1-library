@@ -17,9 +17,9 @@ import java.util.Set;
  * @author nc
  */
 public abstract class Paillier {
-
   private final BigInteger ONE = BigInteger.ONE;
 
+  public abstract int getCODE();
   /**
    * Encrypts a BigInteger
    * <code>m</code>. This method generates a random
