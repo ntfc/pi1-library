@@ -15,6 +15,32 @@ public class ByteUtils {
 
   private static final int INT_LENGTH_IN_BYTES = 4;
 
+  public static byte[] arrayBytetoByte(byte[] ... a) {
+    if(a.length == 0) {
+      throw new IllegalArgumentException("You must supply at least one BigInteger");
+    }
+    int[] bytesLength = new int[a.length];
+    int len = 0;
+    for(int i = 0; i < a.length; i++) {
+      bytesLength[i] = a[i].length;
+      len += INT_LENGTH_IN_BYTES + bytesLength[i];
+    }
+    if(len > Integer.MAX_VALUE) {
+      // TODO: ....
+      throw new OutOfMemoryError("Could not send the array of BigIntegers");
+    }
+
+    byte[] res = new byte[INT_LENGTH_IN_BYTES + (int)len];
+    System.arraycopy(intToByte(a.length), 0, res, 0, INT_LENGTH_IN_BYTES);
+    for(int i = 0, offset = INT_LENGTH_IN_BYTES; i < a.length; i++) {
+      // append byte[] length
+      System.arraycopy(intToByte(bytesLength[i]), 0, res, offset, INT_LENGTH_IN_BYTES);
+      // append BigInteger
+      System.arraycopy(a[i], 0, res, offset + INT_LENGTH_IN_BYTES, bytesLength[i]);
+      offset += bytesLength[i] + INT_LENGTH_IN_BYTES;
+    }
+    return res;
+  }
   /**
    * Sends an array of BigInteger through the channel
    * <p>
@@ -52,6 +78,28 @@ public class ByteUtils {
       // append BigInteger
       System.arraycopy(bigInts[i], 0, res, offset + INT_LENGTH_IN_BYTES, bigIntLengths[i]);
       offset += bigIntLengths[i] + INT_LENGTH_IN_BYTES;
+    }
+
+    return res;
+  }
+
+  public static byte[][] byteToArrayByte(byte[] a) {
+    byte[] lenByteA = new byte[INT_LENGTH_IN_BYTES];
+    System.arraycopy(a, 0, lenByteA, 0, INT_LENGTH_IN_BYTES);
+    int len = byteToInt(lenByteA);
+    byte[][] res = new byte[len][];
+    int offset = INT_LENGTH_IN_BYTES;
+
+    for(int i = 0; i < len; i++) {
+      byte[] lenByte = new byte[INT_LENGTH_IN_BYTES];
+      System.arraycopy(a, offset, lenByte, 0, INT_LENGTH_IN_BYTES);
+      int lenByteArray = byteToInt(lenByte);
+      byte[] byteArray = new byte[lenByteArray];
+      System.arraycopy(a, offset+INT_LENGTH_IN_BYTES, byteArray, 0, lenByteArray);
+
+      res[i] = byteArray;
+
+      offset += INT_LENGTH_IN_BYTES + lenByteArray;
     }
 
     return res;
