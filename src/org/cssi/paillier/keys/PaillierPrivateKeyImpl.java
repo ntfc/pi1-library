@@ -13,10 +13,11 @@ import org.cssi.paillier.interfaces.PaillierPrivateKey;
  * @author nc
  */
 /*public */final class PaillierPrivateKeyImpl implements PaillierPrivateKey {
-  private final BigInteger n, mu, lambda, p, q, nSquare;
+  private final BigInteger n, mu, lambda, p, q, nSquare, g;
 
-  public PaillierPrivateKeyImpl(BigInteger p, BigInteger q, BigInteger n, BigInteger mu, BigInteger lambda) {
+  public PaillierPrivateKeyImpl(BigInteger p, BigInteger q, BigInteger n, BigInteger g, BigInteger mu, BigInteger lambda) {
     this.n = n;
+    this.g = g;
     this.mu = mu;
     this.lambda = lambda;
     this.p = p;
@@ -24,12 +25,13 @@ import org.cssi.paillier.interfaces.PaillierPrivateKey;
     this.nSquare = n.pow(2);
   }
 
-  public PaillierPrivateKeyImpl(BigInteger p, BigInteger q, BigInteger mu, BigInteger lambda) {
+  public PaillierPrivateKeyImpl(BigInteger p, BigInteger q, BigInteger g, BigInteger mu, BigInteger lambda) {
     this.n = p.multiply(q);
     this.mu = mu;
     this.lambda = lambda;
     this.p = p;
     this.q = q;
+    this.g = g;
     this.nSquare = n.pow(2);
   }
 
@@ -76,6 +78,10 @@ import org.cssi.paillier.interfaces.PaillierPrivateKey;
   @Override
   public BigInteger getQ() {
     return this.q;
+  }
+
+  public BigInteger getG() {
+    return g;
   }
 
 }

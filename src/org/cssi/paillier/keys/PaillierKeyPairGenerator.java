@@ -87,7 +87,7 @@ public final class PaillierKeyPairGenerator extends KeyPairGeneratorSpi {
       mu = calcModInv(g, lambda, n, nSquare);
     } while (mu == null);
     PaillierPublicKey pubKey = new PaillierPublicKeyImpl(n, g);
-    PaillierPrivateKey privKey = new PaillierPrivateKeyImpl(p, q, mu, lambda);
+    PaillierPrivateKey privKey = new PaillierPrivateKeyImpl(p, q, g, mu, lambda);
     return new KeyPair(pubKey, privKey);
   }
 

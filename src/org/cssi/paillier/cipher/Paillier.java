@@ -10,6 +10,7 @@ import java.security.PrivateKey;
 import java.security.PublicKey;
 import java.security.SecureRandom;
 import java.util.Set;
+import org.cssi.paillier.interfaces.PaillierPrivateKey;
 
 /**
  * Abstract class that define the basic methods of a Paillier cryptosystem
@@ -74,6 +75,14 @@ public abstract class Paillier {
    * @throws PaillierException
    * @throws InvalidKeyException
    */
-  public abstract BigInteger mult(PrivateKey key, Set<BigInteger> l) throws
-          PaillierException, InvalidKeyException;
+  public BigInteger mult(PrivateKey key, Set<BigInteger> l) throws
+          PaillierException, InvalidKeyException {
+    if(l.isEmpty())
+      return null;
+    BigInteger h = BigInteger.ONE;
+    for(BigInteger b : l) {
+      h = h.multiply(b);
+    }
+    return h.mod(((PaillierPrivateKey)key).getNSquare());
+  }
 }

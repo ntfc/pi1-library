@@ -18,13 +18,15 @@ public final class PaillierPrivateKeySpec implements KeySpec {
   private BigInteger lambda;
   private BigInteger p;
   private BigInteger q;
+  private BigInteger g;
 
-  public PaillierPrivateKeySpec(BigInteger p, BigInteger q, BigInteger n, BigInteger mu, BigInteger lambda) {
+  public PaillierPrivateKeySpec(BigInteger p, BigInteger q, BigInteger n, BigInteger g, BigInteger mu, BigInteger lambda) {
     this.n = n;
     this.mu = mu;
     this.lambda = lambda;
     this.p = p;
     this.q = q;
+    this.g = g;
   }
 
   public BigInteger getN() {
@@ -45,6 +47,10 @@ public final class PaillierPrivateKeySpec implements KeySpec {
 
   public BigInteger getQ() {
     return q;
+  }
+
+  public BigInteger getG() {
+    return g;
   }
   
 

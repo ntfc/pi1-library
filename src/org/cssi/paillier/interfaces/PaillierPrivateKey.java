@@ -34,4 +34,6 @@ public interface PaillierPrivateKey extends PaillierKey, PrivateKey {
    * @return
    */
   BigInteger getQ();
+
+  BigInteger getG();
 }
