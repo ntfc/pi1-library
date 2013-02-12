@@ -9,6 +9,7 @@ import java.security.InvalidKeyException;
 import java.security.PrivateKey;
 import java.security.PublicKey;
 import java.security.SecureRandom;
+import java.util.List;
 import java.util.Set;
 import org.cssi.paillier.interfaces.PaillierPrivateKey;
 
@@ -68,6 +69,25 @@ public abstract class Paillier {
           PaillierException, InvalidKeyException;
 
   /**
+   * Applies the homomorphic property of Paillier to a Set of ciphertexts
+   * @param key
+   * @param l
+   * @return
+   * @throws PaillierException
+   * @throws InvalidKeyException
+   */
+  // TODO: Set ok?
+  public BigInteger mult(PrivateKey key, Set<BigInteger> l) throws
+          PaillierException, InvalidKeyException {
+    if(l.isEmpty())
+      return null;
+    BigInteger h = BigInteger.ONE;
+    for(BigInteger b : l) {
+      h = h.multiply(b);
+    }
+    return h.mod(((PaillierPrivateKey)key).getNSquare());
+  }
+  /**
    * Applies the homomorphic property of Paillier to a List of ciphertexts
    * @param key
    * @param l
@@ -75,7 +95,7 @@ public abstract class Paillier {
    * @throws PaillierException
    * @throws InvalidKeyException
    */
-  public BigInteger mult(PrivateKey key, Set<BigInteger> l) throws
+  public BigInteger mult(PrivateKey key, List<BigInteger> l) throws
           PaillierException, InvalidKeyException {
     if(l.isEmpty())
       return null;
